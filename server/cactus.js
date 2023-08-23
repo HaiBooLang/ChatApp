@@ -19,10 +19,21 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
+/**
+ * 404 handler.
+ */
 app.use(function (req, res, next) {
     let err = new Error('Not Found: 恭喜你来到了互联网的尽头')
     err.status = 404
     next(err)
+})
+
+/**
+ * 500 handler.
+ */
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500)
+    res.send(err.message)
 })
 
 /**
