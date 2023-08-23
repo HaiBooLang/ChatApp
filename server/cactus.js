@@ -21,8 +21,13 @@ app.get('/', (req, res) => {
 
 /**
  * 404 handler.
+ * @function
+ * @name notFoundHandler
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {Function} next - The next middleware function.
  */
-app.use(function (req, res, next) {
+app.use(function notFoundHandler(req, res, next) {
     let err = new Error('Not Found: 恭喜你来到了互联网的尽头')
     err.status = 404
     next(err)
@@ -30,8 +35,14 @@ app.use(function (req, res, next) {
 
 /**
  * 500 handler.
+ * @function
+ * @name errorHandler
+ * @param {Object} err - The error object.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {Function} next - The next middleware function.
  */
-app.use(function (err, req, res, next) {
+app.use(function errorHandler(err, req, res, next) {
     res.status(err.status || 500)
     res.send(err.message)
 })
