@@ -19,6 +19,12 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
+app.use(function (req, res, next) {
+    let err = new Error('Not Found: 恭喜你来到了互联网的尽头')
+    err.status = 404
+    next(err)
+})
+
 /**
  * Starts the server and logs a message to the console.
  * @function
