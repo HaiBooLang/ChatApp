@@ -9,6 +9,30 @@ const app = express()
 const port = 3000
 
 /**
+ * Set up CORS headers for all routes.
+ * @function
+ * @name setCORSHeaders
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {Function} next - The next middleware function.
+ */
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:8080")
+    res.header("Access-Control-Allow-Headers", "Content-Type")
+    res.header("Access-Control-Allow-Methods", "*")
+    res.header("Content-Type", "application/json;charset=utf-8")
+    next()
+})
+
+/**
+ * Require the router module and pass the app instance to it.
+ * @function
+ * @name requireRouter
+ * @param {Object} app - The Express app instance.
+ */
+require('./router/index')(app)
+
+/**
  * Responds with a "Hello World!" message.
  * @function
  * @name getHome
@@ -18,8 +42,6 @@ const port = 3000
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
-
-require('./router/index')(app)
 
 /**
  * 404 handler.
