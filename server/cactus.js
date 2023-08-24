@@ -19,6 +19,8 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
+require('./router/index')(app)
+
 /**
  * 404 handler.
  * @function
