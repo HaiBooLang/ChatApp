@@ -6,7 +6,7 @@
  * @property {string} pass - The password of the qqmail account.
  */
 module.exports = {
-    qqmail:{
+    qqmail: {
         user: '2320608933@qq.com',
         pass: 'zsjzbweudhjmdijf'
     }

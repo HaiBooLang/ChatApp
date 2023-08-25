@@ -5,7 +5,7 @@ const dbserver = require('../dao/dbserver');
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
  */
-exports.signUp = function (req, res) {  
+exports.signUp = function (req, res) {
     let mail = req.body.mail
     let name = req.body.name
     let pwd = req.body.pwd

@@ -15,7 +15,7 @@ var encryption = function (password) {
  * @param {string} hash - The hash to be compared against.
  * @returns {boolean} True if the password matches the hash, false otherwise.
  */
-var verificaion = function (password, hash) {   
+var verificaion = function (password, hash) {
     return bcrypt.compareSync(password, hash);
 }
 

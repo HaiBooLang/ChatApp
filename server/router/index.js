@@ -6,7 +6,7 @@ const signup = require('../server/signup');
  * Sets up the router for the application.
  * @param {Object} app - The Express application object.
  */
-module.exports = function(app) {
+module.exports = function (app) {
     /**
      * GET endpoint for testing purposes.
      * @name GET/test
