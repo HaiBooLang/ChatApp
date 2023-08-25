@@ -1,9 +1,5 @@
-/**
- * Finds all users in the database.
- * @param {Object} res - The response object.
- * @returns {void}
- */
 var bcrypt = require('../dao/bcrypt')
+var jwt = require('../dao/jwt')
 var dbmodel = require('../model/dbmodel')
 var User = dbmodel.model('User')
 
@@ -48,4 +44,35 @@ exports.countUserValue = function (data, type, res) {
             res.send({status:200, success: true, message: '查询成功', result: result == 0 ? 0 : 1})
         }
     })
+
+    exports.userMatch = function (data, pwd, res) {
+        let wherestr = {$or: [{'name': data}, {'email': data}]}
+        let out = {name: 1, email: 1, psw: 1}
+
+        User.find(wherestr, out, function(err, result) {
+            if(err) {
+                res.send({status:500, success: false, message: '查询失败'})
+            } else {
+                if(result == '') {
+                    res.send({status:400, success: false, message: '用户不存在或密码错误'})
+                } else {
+                    result.map(function (e) {
+                        const pwdMatchFlag = bcrypt.verification(pwd, e.psw)
+                        if(pwdMatchFlag) {
+                            let token = jwt.generateToken(e._id)
+                            let back = {
+                                id: e._id,
+                                name: e.name,
+                                imgurl: e.imgurl,
+                                token: token
+                            }
+                            res.send({status:200, success: true, message: '登录成功', result: back})
+                        } else {
+                            res.send({status:400, success: false, message: '用户不存在或密码错误'})
+                        }
+                    })
+                }
+            }
+        })
+    }
 }
