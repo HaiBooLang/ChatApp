@@ -3,3 +3,4 @@ app/
 *.xmind
 
 *.drawio
+.$analyze.drawio.bkp
