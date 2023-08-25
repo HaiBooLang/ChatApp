@@ -1,12 +1,14 @@
 const dbserver = require('../dao/dbserver');
 const emailserver = require('../dao/emailserver');
 const signup = require('../server/signup');
+const signin = require('../server/signin');
 
 /**
  * Sets up the router for the application.
  * @param {Object} app - The Express application object.
  */
 module.exports = function (app) {
+
     /**
      * GET endpoint for testing purposes.
      * @name GET/test
@@ -69,4 +71,20 @@ module.exports = function (app) {
     app.post('/signup/judge', (req, res) => {
         signup.judgeValue(req, res);
     });
+
+    /**
+     * POST endpoint for checking if a user's credentials match.
+     * @name POST/signin/match
+     * @function
+     * @memberof module:router
+     * @inner
+     * @param {Object} req - The Express request object.
+     * @param {Object} req.body - The request body.
+     * @param {string} req.body.username - The username of the user.
+     * @param {string} req.body.password - The password of the user.
+     * @param {Object} res - The Express response object.
+     */
+    app.post('/signin/match', (req, res) => {
+        signin.signIn(req, res);
+    })
 };
