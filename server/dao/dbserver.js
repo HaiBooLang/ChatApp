@@ -45,7 +45,7 @@ exports.countUserValue = function (data, type, res) {
         if(err) {
             res.send({status:500, success: false, message: '查询失败'})
         } else {
-            res.send({status:200, success: true, message: '查询成功', result: result})
+            res.send({status:200, success: true, message: '查询成功', result: result == 0 ? 0 : 1})
         }
     })
 }
