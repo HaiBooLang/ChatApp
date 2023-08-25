@@ -3,6 +3,7 @@
  * It sets up an Express app and listens on port 3000.
  * @module ChatAppServer
  */
+var bodyParser = require('body-parser')
 
 const express = require('express')
 const app = express()
@@ -17,12 +18,18 @@ const port = 3000
  * @param {Function} next - The next middleware function.
  */
 app.all('*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:8080")
-    res.header("Access-Control-Allow-Headers", "Content-Type")
-    res.header("Access-Control-Allow-Methods", "*")
+    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+    res.header('Access-Control-Allow-Credentials', 'true')
+    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS")
     res.header("Content-Type", "application/json;charset=utf-8")
+    if (req.method == 'OPTIONS') {
+        res.sendStatus(200)
+    }
     next()
 })
+
+app.use(bodyParser.json())
 
 /**
  * Require the router module and pass the app instance to it.
