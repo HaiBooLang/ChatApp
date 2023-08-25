@@ -3,7 +3,7 @@
  * @param {Object} res - The response object.
  * @returns {void}
  */
-var bcrypt = require('../model/bcrypt')
+var bcrypt = require('../dao/bcrypt')
 var dbmodel = require('../model/dbmodel')
 var User = dbmodel.model('User')
 
